@@ -7,6 +7,7 @@ export const AppProvider = ({ children }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isSubmenuOpen, setIsSubmenuOpen] = useState(false);
   const [location, setLocation] = useState({});
+  const [page, setPage] = useState({ page: "", links: [] });
 
   const openSidebar = () => {
     setIsSidebarOpen(true);
@@ -17,6 +18,11 @@ export const AppProvider = ({ children }) => {
   };
 
   const openSubmenu = (text, coordinates) => {
+    // go through the  list and return element that matches the text
+    const page = sublinks.find((link) => {
+      return link.page === text;
+    });
+    setPage(page);
     setLocation(coordinates);
     setIsSubmenuOpen(true);
   };
@@ -31,6 +37,7 @@ export const AppProvider = ({ children }) => {
         isSidebarOpen,
         isSubmenuOpen,
         location,
+        page,
         openSidebar,
         closeSidebar,
         openSubmenu,
